@@ -26,6 +26,7 @@ const timer = 30 * 1000;
     console.log('This is WeChoice website')
   }
 
+  console.log('Start voting...')
   await vote()
 
   // Wait for 30 seconds
