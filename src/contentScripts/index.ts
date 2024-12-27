@@ -1,16 +1,31 @@
 /* eslint-disable no-console */
-import { onMessage } from 'webext-bridge/content-script'
 
-(() => {
-  console.info('[vitesse-webext] Hello world from content script ☺️')
+async function vote() {
+  let button = document.querySelector('.vote-action.js-vote-action') as HTMLButtonElement
 
-  // Add hello world to the page
-  const div = document.createElement('div')
-  div.textContent = 'Hello world from Vitesse Webext!'
-  document.body.prepend(div)
+  while (!button) {
+    await new Promise(resolve => setTimeout(resolve, 3000))
+    button = document.querySelector('.vote-action.js-vote-action') as HTMLButtonElement
+  }
 
-  // communication example: send previous tab title from background page
-  onMessage('tab-prev', ({ data }) => {
-    console.log(`[vitesse-webext] Navigate from page "${data.title}"`)
-  })
+  button.click()
+}
+
+const timer = 60 * 1000;
+
+(async () => {
+  const isWeChoice = window.location.href.includes('wechoice.vn')
+  if (!isWeChoice) {
+    console.log('This is not WeChoice website')
+    return
+  }
+  else {
+    console.log('This is WeChoice website')
+  }
+
+  vote()
+  setInterval(() => {
+    console.log('Voting...')
+    vote()
+  }, timer)
 })()
