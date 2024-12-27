@@ -2,10 +2,13 @@
 
 async function vote() {
   let button = document.querySelector('.vote-action.js-vote-action') as HTMLButtonElement
+  let tryCount = 0
+  const maxTry = 3
 
-  while (!button) {
+  while (!button && tryCount < maxTry) {
     await new Promise(resolve => setTimeout(resolve, 3000))
     button = document.querySelector('.vote-action.js-vote-action') as HTMLButtonElement
+    tryCount++
   }
 
   await new Promise(resolve => setTimeout(resolve, 3000))
