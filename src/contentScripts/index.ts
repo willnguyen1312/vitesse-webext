@@ -21,7 +21,7 @@ async function vote() {
   button.click()
 }
 
-const timer = 30 * 1000;
+const timer = 10 * 60 * 1000;
 
 (async () => {
   const isWeChoice = window.location.href.includes('wechoice.vn')
